@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formulir pendaftaran LAPOR! - Sistem pelaporan pengaduan masyarakat">
+    <title>Daftar - LAPOR!</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #292d2e, #ff0000);
+            --hover-gradient: linear-gradient(135deg, #292d2e, #971313);
+            --error-color: #dc3545;
+            --text-color: #333;
+            --label-color: rgba(0, 0, 0, 0.5);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--error-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff;
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.5rem 0;
+            font-size: 1rem;
+            border: none;
+            border-bottom: 2px solid var(--border-color);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #292d2e;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 0;
+            bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--label-color);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:not(:placeholder-shown) ~ label {
+            transform: translateY(-1.5rem);
+            font-size: 0.875rem;
+            color: #292d2e;
+        }
+
+        .gender-section {
+            grid-column: 1 / -1;
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-group {
+            grid-column: 1 / -1;
+            margin: 1rem 0;
+        }
+
+        .checkbox-group label {
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .submit-button {
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+
+        button {
+            padding: 0.75rem 2rem;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: var(--hover-gradient);
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title gradient-text">Registrasi</h1>
+        
+        <div class="info-box">
+            Dengan mendaftar saya menyetujui data saya digunakan untuk SAMBAT! untuk melakukan tindak lanjut pengaduan 
+            sebagaimana prosedur penanganan SAMBAT! sesuai dengan Peraturan Presiden Nomor 96 Tahun 2018 tentang 
+            Sistem Pemerintahan Berbasis Elektronik.
+        </div>
+
+        <form action="/registercheck" method="POST">
+            <div class="form-grid">
+                <div class="input-group">
+                    <input type="text" id="name" name="name" placeholder=" " required>
+                    <label for="nama_lengkap">Nama Lengkap</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="username" name="username" placeholder=" " required>
+                    <label for="username">Username</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="tel" id="telepon" name="telepon" placeholder=" " required>
+                    <label for="telepon">Nomor Telepon</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder=" " required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="alamat" name="alamat" placeholder=" " required>
+                    <label for="alamat">Alamat Lengkap</label>
+                </div>
+
+                
+
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder=" " required>
+                    <label for="password">Password</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="password-confirmation" name="password-confirmation" placeholder=" " required>
+                    <label for="password-confirmation">Konfirmasi Password</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <div>
+                        <input type="checkbox" id="anonymity" name="anonymity" required>
+                        <label for="anonymity">Apakah Anda ingin merahasiakan profil yang dapat diidentifikasi?</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Saya telah membaca dan menyetujui Syarat dan Ketentuan Layanan</label>
+                    </div>
+                </div>
+
+                <div class="submit-button">
+                    <button type="submit" name="daftar">Daftar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

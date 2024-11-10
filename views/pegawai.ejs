@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMBAT! - Halaman Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #c41e3a;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .navbar a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #c41e3a;
+        }
+
+        .navbar .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #c41e3a;
+        }
+
+        .data-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .data-title {
+            background: #c41e3a;
+            color: white;
+            padding: 20px;
+            margin: -40px -40px 30px -40px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+
+        .data-title h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-view {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-edit {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            color: #333;
+            font-size: 0.9rem;
+            background-color: #f1f1f1;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .pagination a.active {
+            background-color: #c41e3a;
+            color: white;
+        }
+
+        .pagination a:hover {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                margin-bottom: 15px;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+            }
+
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SAMBAT!</div>
+        <div class="menu">
+            <a href="/laporan">Laporan Publik</a>
+            <a href="/logout">Keluar</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Halaman Pegawai</h1>
+            <p>Kelola data laporan pengaduan dan pengguna</p>
+        </div>
+
+        <div class="data-container">
+            <div class="data-title">
+                <h2>Data Laporan Pengaduan</h2>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Judul</th>
+                        <th>Isi</th>
+                        <th>Tanggal</th>
+                        <th>TKP</th>
+                        <th>Kategori</th>
+                        <th>Gambar</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (laporan && laporan.length > 0) { %>
+                        <% laporan.forEach(item => { %>
+                            <tr>
+                                <td data-label="Judul"><%= item.judul %></td>
+                                <td data-label="Isi"><%= item.isi %></td>
+                                <td data-label="Tanggal"><%= item.tanggal %></td>
+                                <td data-label="TKP"><%= item.tkp %></td>
+                                <td data-label="Kategori"><%= item.kategori %></td>
+                                <td data-label="Gambar">
+                                    <img src="/image/<%= item.gambar %>" alt="Gambar" style="width: 100px;">
+                                </td>
+                                <td data-label="Aksi">
+                                    <form action="/approve/<%= item.id %>" method="POST" style="display: inline;">
+                                        <button class="btn btn-view" type="submit">Setujui</button>
+                                    </form>
+                                    <form action="/reject/<%= item.id %>" method="POST" style="display: inline;">
+                                        <button class="btn btn-delete" type="submit" onclick="return confirm('Apakah Anda yakin ingin menolak laporan ini?');">Tolak</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="7" style="text-align:center;">Tidak ada laporan ditemukan.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
+            <!-- Pagination untuk Data Laporan -->
+            <div class="pagination">
+                <% if (currentPage > 1) { %>
+                    <a href="?page=<%= currentPage - 1 %>">Previous</a>
+                <% } %>
+
+                <% for (let i = 1; i <= totalPagesLaporan; i++) { %>
+                    <a href="?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+                <% } %>
+
+                <% if (currentPage < totalPagesLaporan) { %>
+                    <a href="?page=<%= currentPage + 1 %>">Next</a>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="data-container">
+            <div class="data-title">
+                <h2>Data Pengguna</h2>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Peran</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (user && user.length > 0) { %>
+                        <% user.forEach(u => { %>
+                            <tr>
+                                <td data-label="ID"><%= u.id %></td>
+                                <td data-label="Nama"><%= u.name %></td>
+                                <td data-label="Email"><%= u.email %></td>
+                                <td data-label="Peran"><%= u.level %></td>
+                                <td data-label="Aksi">
+                                    <form action="/delete-user/<%= u.id %>" method="POST" 
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');"
+                                         style="display: inline;">
+                               
+                                    <button class="btn btn-delete">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5" style="text-align:center;">Tidak ada pengguna ditemukan.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            
+            <!-- Pagination untuk Data Pengguna -->
+            <div class="pagination">
+                <% if (currentPageUser > 1) { %>
+                    <a href="?pageUser=<%= currentPageUser - 1 %>">Previous</a>
+                <% } %>
+    
+                <% for (let i = 1; i <= totalPagesUser; i++) { %>
+                    <a href="?pageUser=<%= i %>" class="<%= currentPageUser === i ? 'active' : '' %>"><%= i %></a>
+                <% } %>
+    
+                <% if (currentPageUser < totalPagesUser) { %>
+                    <a href="?pageUser=<%= currentPageUser + 1 %>">Next</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Copyright by Kelompok 7</p>
+    </footer>
+
+    <script>
+        function formatTanggal(tanggal) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(tanggal).toLocaleDateString('id-ID', options);
+        }
+    
+        // Format setiap elemen tanggal setelah halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            const tanggalElements = document.querySelectorAll('.tanggal');
+            tanggalElements.forEach(element => {
+                element.textContent = formatTanggal(element.textContent);
+            });
+        });
+    </script>
+</body>
+</html>

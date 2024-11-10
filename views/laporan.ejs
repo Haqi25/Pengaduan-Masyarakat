@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMBAT! - Laporan Publik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Style CSS yang ada tetap sama */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .navbar a {
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #c41e3a;
+        }
+
+        .navbar .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #c41e3a;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #c41e3a;
+        }
+
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filter-item {
+            flex: 1;
+        }
+
+        .filter-item label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .filter-item select, 
+        .filter-item input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .report-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .report-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .report-header {
+            background: #c41e3a;
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+        }
+
+        .report-content {
+            padding: 20px;
+        }
+
+        .report-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .pagination button {
+            padding: 8px 15px;
+            border: none;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .pagination button.active {
+            background: #c41e3a;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            color: #333;
+            font-size: 0.9rem;
+            background-color: #f1f1f1;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-group {
+                flex-direction: column;
+            }
+
+            .reports-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SAMBAT!</div>
+        <div class="menu">
+            <a href="sambat">Tentang SAMBAT!</a>
+            <a href="/">Beranda</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Laporan Publik</h1>
+            <p>Lihat dan pantau laporan yang telah disampaikan masyarakat</p>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <div class="filter-item">
+                    <label for="kategori">Kategori</label>
+                    <select id="kategori" onchange="filterLaporan()">
+                        <option value="">Semua Kategori</option>
+                        <option value="Infrastruktur">Infrastruktur</option>
+                        <option value="Pelayanan Publik">Pelayanan Publik</option>
+                        <option value="Lingkungan">Lingkungan</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+              
+                <div class="filter-item">
+                    <label for="status">Status</label>
+                    <select id="status" onchange="filterLaporan()">
+                        <option value="">Semua Status</option>
+                        <option value="disetujui">Di Setujui</option>
+                        <option value="di proses">Diproses</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="reports-grid">
+            <% laporan.forEach(laporan => { %>
+                <div class="report-card">
+                    <div class="report-header">
+                        Laporan ID: <%= laporan.id %>
+                    </div>
+                    <div class="report-content">
+                        <h3 class="report-title"><%= laporan.judul %></h3>
+                        <p class="report-details">
+                            <%= laporan.isi %>
+                        </p>
+                        <div class="report-status">
+                            <span><%= new Date(laporan.tanggal).toLocaleDateString() %></span>
+                            <span class="status-badge status-<%= laporan.status %>"><%= laporan.status.charAt(0).toUpperCase() + laporan.status.slice(1) %></span>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+
+        <div class="pagination">
+            <% if (page > 1) { %>
+                <button onclick="location.href='?page=<%= page - 1 %>'">&lt;</button>
+            <% } %>
+
+            <% for (let i = 1; i <= totalPages; i++) { %>
+                <button class="<%= page === i ? 'active' : '' %>" onclick="location.href='?page=<%= i %>'"><%= i %></button>
+            <% } %>
+
+            <% if (page < totalPages) { %>
+                <button onclick="location.href='?page=<%= page + 1 %>'">&gt;</button>
+            <% } %>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Copyright by Kelompok 7</p>
+    </footer>
+    <script>
+        function filterLaporan() {
+            const kategori = document.getElementById('kategori').value;
+            const status = document.getElementById('status').value;
+            const params = new URLSearchParams();
+
+            // Tambahkan kategori ke parameter jika dipilih
+            if (kategori) {
+                params.append('kategori', kategori);
+            }
+            // Tambahkan status ke parameter jika dipilih
+            if (status) {
+                params.append('status', status);
+            }
+
+            // Redirect ke halaman saat ini dengan parameter query yang baru
+            location.href = '/laporan?' + params.toString();
+        }
+    </script>
+    
+</body>
+</html>
